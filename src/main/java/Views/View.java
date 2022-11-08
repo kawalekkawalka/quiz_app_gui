@@ -2,6 +2,8 @@ package Views;
 
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.gui2.*;
+import com.googlecode.lanterna.gui2.dialogs.MessageDialog;
+import com.googlecode.lanterna.gui2.dialogs.MessageDialogButton;
 import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
@@ -14,6 +16,7 @@ public class View {
     private Terminal terminal;
     private Screen screen;
     private BasicWindow window;
+    private MultiWindowTextGUI gui;
 
     public View() throws IOException {
         terminal = new DefaultTerminalFactory().createTerminal();
@@ -34,9 +37,11 @@ public class View {
     public void addPanel(Panel panel){
         this.window.setComponent(panel);
         // Create gui and start gui
-        MultiWindowTextGUI gui = new MultiWindowTextGUI(this.screen, new DefaultWindowManager(), new EmptySpace(TextColor.ANSI.BLUE));
+        gui = new MultiWindowTextGUI(this.screen, new DefaultWindowManager(), new EmptySpace(TextColor.ANSI.BLUE));
         gui.addWindowAndWait(this.window);
     }
 
-
+    public void showMessageDialog(String title, String text, MessageDialogButton button){
+        MessageDialog.showMessageDialog(gui, title, text, button);
+    }
 }

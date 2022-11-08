@@ -89,5 +89,8 @@ public class GameView {
             System.out.println("zajebiscei");
             setNewQuestion();
         }
+        else{
+            Controller.showMessageDialog("Przegrałeś", "Przegrałeś", MessageDialogButton.Retry);
+        }
     }
 }
