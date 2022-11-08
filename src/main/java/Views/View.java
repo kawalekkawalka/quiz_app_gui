@@ -44,4 +44,6 @@ public class View {
     public void showMessageDialog(String title, String text, MessageDialogButton button){
         MessageDialog.showMessageDialog(gui, title, text, button);
     }
+
+
 }

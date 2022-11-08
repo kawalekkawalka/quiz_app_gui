@@ -23,6 +23,18 @@ public class Controller {
         new GameView();
     }
 
+    public static void backToMenu() throws IOException {
+        new MenuView();
+    }
+
+    public static void addQuestionMenu(){
+        new AddQuestionView();
+    }
+
+    public static void addQuestion(HashMap<String, String> question){
+        Questions.addQuestion(question);
+    }
+
     public static void closeApp(){
         view.closeView();
     }
@@ -34,4 +46,5 @@ public class Controller {
     public static void showMessageDialog(String title, String text, MessageDialogButton button){
         view.showMessageDialog(title, text, button);
     }
+
 }

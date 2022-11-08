@@ -15,9 +15,6 @@ import Controllers.Controller;
 
 public class MenuView {
     public MenuView() throws IOException {
-//        Terminal terminal = new DefaultTerminalFactory().createTerminal();
-//        Screen screen = new TerminalScreen(terminal);
-//        screen.startScreen();
 
         // Create panel to hold components
         Panel panel = new Panel();
@@ -38,6 +35,7 @@ public class MenuView {
         new Button("Dodaj pytanie", new Runnable() {
             @Override
             public void run() {
+                Controller.addQuestionMenu();
             }
         }).addTo(panel);
 

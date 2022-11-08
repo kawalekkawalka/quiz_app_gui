@@ -24,13 +24,15 @@ public class GameView {
     private final Button answerC;
     private final Button answerD;
     private String correctAnswer;
+    private int score;
 
     public GameView() throws IOException {
 
         // Create panel to hold components
         Panel panel = new Panel(new GridLayout(2));
         panel.addComponent(new EmptySpace(new TerminalSize(0, 0)));
-        scoreLabel = new Label("Twój aktualny wynik: 0");
+        score = 0;
+        scoreLabel = new Label("Twój aktualny wynik: ");
         panel.addComponent(scoreLabel);
 
         contentLabel = new Label("Miejsce na tresc");
@@ -76,6 +78,7 @@ public class GameView {
 
     public void setNewQuestion(){
         HashMap<String, String> question = Controller.getQuestion();
+        scoreLabel.setText("Twój aktualny wynik: " + score);
         correctAnswer = question.get("correctAnswer");
         contentLabel.setText(question.get("content"));
         answerA.setLabel(question.get("answerA"));
@@ -86,11 +89,16 @@ public class GameView {
 
     private void checkAnswer(String answer){
         if (answer.equals(correctAnswer)){
-            System.out.println("zajebiscei");
+            score++;
             setNewQuestion();
         }
         else{
-            Controller.showMessageDialog("Przegrałeś", "Przegrałeś", MessageDialogButton.Retry);
+            Controller.showMessageDialog("Przegrana ","Przegrałeś :(  Poprawną odpowiedzą było "+ correctAnswer, MessageDialogButton.Continue);
+            try {
+                Controller.backToMenu();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

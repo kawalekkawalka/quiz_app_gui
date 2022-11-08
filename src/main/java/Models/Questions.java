@@ -4,6 +4,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import java.io.FileReader;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
 
@@ -48,5 +49,29 @@ public class Questions {
         }
         int number = (int)(Math.random() * questionsList.size());
         return parseQuestionObject((JSONObject) questionsList.get(number));
+    }
+
+    public static void addQuestion(HashMap<String, String> question){
+        JSONObject newQuestion = new JSONObject();
+        JSONArray answers = new JSONArray();
+        answers.add(question.get("answerA"));
+        answers.add(question.get("answerB"));
+        answers.add(question.get("answerC"));
+        answers.add(question.get("answerD"));
+        newQuestion.put("tresc", question.get("content"));
+        newQuestion.put("odp", answers);
+        newQuestion.put("odp_poprawna", question.get("correctAnswer"));
+
+        if (questionsList == null){
+            loadQuestions();
+        }
+        questionsList.add(newQuestion);
+        try (FileWriter file = new FileWriter("src/main/resources/questions.json")) {
+            file.write(questionsList.toJSONString());
+            file.flush();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
