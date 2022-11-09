@@ -1,0 +1,8 @@
+Orzeł 15
+Hubert 12
+jan 9
+Marcin 6
+Jan 5
+Michał 3
+Adam 2
+Kamil 1

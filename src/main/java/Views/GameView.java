@@ -94,6 +94,7 @@ public class GameView {
         }
         else{
             Controller.showMessageDialog("Przegrana ","Przegrałeś :(  Poprawną odpowiedzą było "+ correctAnswer, MessageDialogButton.Continue);
+            Controller.addResult(score);
             try {
                 Controller.backToMenu();
             } catch (IOException e) {

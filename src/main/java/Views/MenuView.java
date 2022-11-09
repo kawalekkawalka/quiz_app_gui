@@ -40,6 +40,14 @@ public class MenuView {
         }).addTo(panel);
 
         panel.addComponent(new EmptySpace(new TerminalSize(0, 2)));
+        new Button("Tabela wyników", new Runnable() {
+            @Override
+            public void run() {
+                Controller.showLeaderboard();
+            }
+        }).addTo(panel);
+
+        panel.addComponent(new EmptySpace(new TerminalSize(0, 2)));
         new Button("Wyjdź z gry", new Runnable() {
             @Override
             public void run() {

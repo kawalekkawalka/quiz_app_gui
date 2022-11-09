@@ -46,6 +46,16 @@ public class AddQuestionView {
             }
         }).addTo(panel);
 
+        new Button("Wróć do menu", new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Controller.backToMenu();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).addTo(panel);
         Controller.changeView(panel);
     }
 
