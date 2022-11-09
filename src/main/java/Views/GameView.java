@@ -81,10 +81,10 @@ public class GameView {
         scoreLabel.setText("Twój aktualny wynik: " + score);
         correctAnswer = question.get("correctAnswer");
         contentLabel.setText(question.get("content"));
-        answerA.setLabel(question.get("answerA"));
-        answerB.setLabel(question.get("answerB"));
-        answerC.setLabel(question.get("answerC"));
-        answerD.setLabel(question.get("answerD"));
+        answerA.setLabel("A: " + question.get("answerA"));
+        answerB.setLabel("B: " + question.get("answerB"));
+        answerC.setLabel("C: " + question.get("answerC"));
+        answerD.setLabel("D: " + question.get("answerD"));
     }
 
     private void checkAnswer(String answer){

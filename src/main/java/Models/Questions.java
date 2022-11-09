@@ -22,11 +22,7 @@ public class Questions {
             Object obj = jsonParser.parse(reader);
             questionsList = (JSONArray) obj;
 
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
+        } catch (ParseException | IOException e) {
             e.printStackTrace();
         }
     }

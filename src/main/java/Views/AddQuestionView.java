@@ -64,7 +64,7 @@ public class AddQuestionView {
         if (correctAnswer.getText() == "" || content.getText() == "" ||
                 answerA.getText() == "" || answerB.getText() == "" ||
                 answerC.getText() == "" || answerD.getText() == ""){
-            Controller.showMessageDialog("Błąd tworzenia", "Jedno z pól jest puste. Spróbuj ponownie. " + correctAnswer, MessageDialogButton.Retry);
+            Controller.showMessageDialog("Błąd tworzenia", "Jedno z pól jest puste. Spróbuj ponownie. ", MessageDialogButton.Retry);
         }
         else {
             question.put("correctAnswer", correctAnswer.getText());
@@ -74,7 +74,7 @@ public class AddQuestionView {
             question.put("answerC", answerC.getText());
             question.put("answerD", answerD.getText());
             Controller.addQuestion(question);
-            Controller.showMessageDialog(" ", "Pytanie zostało dodane do bazy. " + correctAnswer, MessageDialogButton.Continue);
+            Controller.showMessageDialog(" ", "Pytanie zostało dodane do bazy. ", MessageDialogButton.Continue);
             try {
                 Controller.backToMenu();
             } catch (IOException e) {
