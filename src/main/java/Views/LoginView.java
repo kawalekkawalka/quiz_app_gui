@@ -1,33 +1,37 @@
 package Views;
 
 import Controllers.Controller;
-import com.googlecode.lanterna.TerminalSize;
-import com.googlecode.lanterna.gui2.*;
-import com.googlecode.lanterna.gui2.dialogs.MessageDialogButton;
 
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
+
+import static Controllers.Controller.showMessageDialog;
 
 public class LoginView {
     public LoginView(){
-        Panel panel = new Panel();
-        panel.addComponent(new Label("Wprowadż tu swoją nazwę użytkownika:"));
-        TextBox username = new TextBox(new TerminalSize(35, 1)).addTo(panel);
-        new Button("Kontynuuj", new Runnable() {
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
+        panel.add(new JLabel("Wprowadż tu swoją nazwę użytkownika:"));
+        JTextField usernameField = new JTextField();
+        usernameField.setColumns(20);
+        panel.add(usernameField);
+
+        JButton button = new JButton("Kontynuuj");
+        button.addActionListener(new ActionListener() {
             @Override
-            public void run() {
-                if(username.getText() == ""){
-                    Controller.showMessageDialog("Błąd logowania", "Musisz wprowadzić nazwę użytkownika. ", MessageDialogButton.Retry);
+            public void actionPerformed(ActionEvent e) {
+                if(button.getText() == ""){
+                    System.out.println("niefajnie");
                 }
                 else{
-                    try {
-                        Controller.setGame(username.getText());
-                        Controller.backToMenu();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                    showMessageDialog("Musisz wprowadzić nazwę użytkownika!");
                 }
             }
-        }).addTo(panel);
+        });
+        panel.add(button);
 
         Controller.changeView(panel);
     }

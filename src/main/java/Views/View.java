@@ -1,48 +1,41 @@
 package Views;
 
-import com.googlecode.lanterna.TextColor;
-import com.googlecode.lanterna.gui2.*;
-import com.googlecode.lanterna.gui2.dialogs.MessageDialog;
-import com.googlecode.lanterna.gui2.dialogs.MessageDialogButton;
-import com.googlecode.lanterna.screen.Screen;
-import com.googlecode.lanterna.screen.TerminalScreen;
-import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
-import com.googlecode.lanterna.terminal.Terminal;
-
+import javax.swing.*;
+import java.awt.*;
 import java.io.IOException;
 import java.util.Arrays;
 
 public class View {
-    private Terminal terminal;
-    private Screen screen;
-    private BasicWindow window;
-    private MultiWindowTextGUI gui;
+    private JFrame frame;
 
     public View() throws IOException {
-        terminal = new DefaultTerminalFactory().createTerminal();
-        screen = new TerminalScreen(terminal);
-        screen.startScreen();
-        window = new BasicWindow();
-        window.setHints(Arrays.asList(Window.Hint.CENTERED));
+        frame = new JFrame();
+        frame.setSize(600, 500);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setTitle("QUIZ APP");
+        frame.setVisible(true);
     }
 
-    public void closeView(){
-        try {
-            terminal.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//    public void closeView(){
+//        try {
+//            terminal.close();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
+
+    public void addPanel(JPanel panel){
+        this.frame.add(panel, BorderLayout.CENTER);
+        this.frame.pack();
+        this.frame.setSize(600, 500);
     }
 
-    public void addPanel(Panel panel){
-        this.window.setComponent(panel);
-        // Create gui and start gui
-        gui = new MultiWindowTextGUI(this.screen, new DefaultWindowManager(), new EmptySpace(TextColor.ANSI.BLUE));
-        gui.addWindowAndWait(this.window);
+    public void clearView(){
+        this.frame.removeAll();
     }
 
-    public void showMessageDialog(String title, String text, MessageDialogButton button){
-        MessageDialog.showMessageDialog(gui, title, text, button);
+    public void showMessageDialog(String text){
+        JOptionPane.showMessageDialog(this.frame, text);
     }
 
 
