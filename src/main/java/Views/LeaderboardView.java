@@ -1,47 +1,57 @@
-//package Views;
-//
-//import Controllers.Controller;
-//import com.googlecode.lanterna.TerminalSize;
-//import com.googlecode.lanterna.gui2.*;
-//
-//import java.io.IOException;
-//import java.util.LinkedHashMap;
-//import java.util.Map;
-//import java.util.regex.Pattern;
-//
-//public class LeaderboardView {
-//    public LeaderboardView(LinkedHashMap<String, Integer> top5){
-//        Panel panel = new Panel();
-//        panel.addComponent(new Label("Najlepsi z najlepszych:"));
-//        panel.addComponent(new EmptySpace(new TerminalSize(0, 0)));
-//
-//        for (Map.Entry<String, Integer> entry :
-//                top5.entrySet()) {
-//            panel.addComponent(new Label(entry.getValue() + " - " + entry.getKey()));
-//        }
-//
-//        Label userLabel = new Label("");
-//
-//        if(Controller.checkUserScore() == 0){
-//            userLabel.setText("Nie odpowiedziałeś jeszcze na żadne pytanie.");
-//        }
-//        else{
-//            userLabel.setText("Twój najlepszy wynik to " + Controller.checkUserScore() + " poprawnych odpowiedzi z rzędu.");
-//        }
-//        panel.addComponent(userLabel);
-//
-//        new Button("OK", new Runnable() {
-//            @Override
-//            public void run() {
-//                try {
-//                    Controller.backToMenu();
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        }).addTo(panel);
-//
-//        Controller.changeView(panel);
-//
-//    }
-//}
+package Views;
+
+import Controllers.Controller;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.regex.Pattern;
+
+public class LeaderboardView {
+    public LeaderboardView(LinkedHashMap<String, Integer> top5){
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        JLabel title = new JLabel("Najlepsi z najlepszych:");
+        title.setAlignmentX(Component.CENTER_ALIGNMENT);
+        panel.add(title);
+
+        for (Map.Entry<String, Integer> entry :
+                top5.entrySet()) {
+            JLabel label = new JLabel(entry.getValue() + " - " + entry.getKey());
+            label.setAlignmentX(Component.CENTER_ALIGNMENT);
+            panel.add(label);
+        }
+
+        JLabel userLabel = new JLabel("");
+        userLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        if(Controller.checkUserScore() == 0){
+            userLabel.setText("Nie odpowiedziałeś jeszcze na żadne pytanie.");
+        }
+        else{
+            userLabel.setText("Twój najlepszy wynik to " + Controller.checkUserScore() + " poprawnych odpowiedzi z rzędu.");
+        }
+        panel.add(userLabel);
+
+        JButton backButton = new JButton("Wróć do menu");
+        backButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    Controller.backToMenu();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
+        panel.add(backButton);
+
+        Controller.changeView(panel);
+
+    }
+}

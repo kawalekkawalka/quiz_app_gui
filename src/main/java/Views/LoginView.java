@@ -13,26 +13,38 @@ import static Controllers.Controller.showMessageDialog;
 public class LoginView {
     public LoginView(){
         JPanel panel = new JPanel();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
-        panel.add(new JLabel("Wprowadż tu swoją nazwę użytkownika:"));
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+
+        JLabel label = new JLabel("Wprowadż tu swoją nazwę użytkownika:");
+        label.setAlignmentX(Component.CENTER_ALIGNMENT);
+        panel.add(label);
+        panel.add(Box.createRigidArea(new Dimension(0, 5)));
+
         JTextField usernameField = new JTextField();
-        usernameField.setColumns(20);
+        usernameField.setMaximumSize(new Dimension(200, 20));
+        usernameField.setAlignmentX(Component.CENTER_ALIGNMENT);
         panel.add(usernameField);
+        panel.add(Box.createRigidArea(new Dimension(0, 5)));
 
         JButton button = new JButton("Kontynuuj");
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(button.getText() == ""){
-                    System.out.println("niefajnie");
+                if(usernameField.getText().equals("")){
+                    showMessageDialog("Musisz wprowadzić nazwę użytkownika!");
                 }
                 else{
-                    showMessageDialog("Musisz wprowadzić nazwę użytkownika!");
+                    try {
+                        Controller.setGame(usernameField.getText());
+                        Controller.backToMenu();
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
                 }
             }
         });
+        button.setAlignmentX(Component.CENTER_ALIGNMENT);
         panel.add(button);
-
         Controller.changeView(panel);
     }
 }
