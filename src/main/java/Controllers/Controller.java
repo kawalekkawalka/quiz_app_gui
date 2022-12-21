@@ -36,6 +36,18 @@ public class Controller {
         new AddQuestionView();
     }
 
+    public static void editQuestionMenu(int index){
+        new EditQuestionView(index);
+    }
+
+    public static void deleteQuestion(int index){
+        Questions.deleteQuestion(index);
+    }
+
+    public static void QuestionsMenu() {
+        new QuestionsView(Questions.getQuestions());
+    }
+
     public static void showLeaderboard(){
         new LeaderboardView(game.getTop5());
     }
@@ -52,6 +64,10 @@ public class Controller {
         return Questions.getQuestion();
     }
 
+    public static HashMap<String, String> getQuestionByIndex(int index){
+        return Questions.getQuestionByIndex(index);
+    }
+
     public static void showMessageDialog(String text){
         view.showMessageDialog(text);
     }
@@ -63,5 +79,6 @@ public class Controller {
     public static int checkUserScore(){
         return game.checkUserScore();
     }
+
 
 }

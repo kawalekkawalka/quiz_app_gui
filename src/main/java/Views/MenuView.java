@@ -46,6 +46,18 @@ public class MenuView {
         panel.add(addQuestionButton);
         panel.add(panel.add(Box.createRigidArea(new Dimension(0, 15))));
 
+        JButton editQuestionButton = new JButton("Edytuj pytanie");
+        editQuestionButton.setMaximumSize(new Dimension(200, 40));
+        editQuestionButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Controller.QuestionsMenu();
+            }
+        });
+        editQuestionButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        panel.add(editQuestionButton);
+        panel.add(panel.add(Box.createRigidArea(new Dimension(0, 15))));
+
         JButton leaderboardButton = new JButton("Tabela wyników");
         leaderboardButton.setMaximumSize(new Dimension(200, 40));
         leaderboardButton.addActionListener(new ActionListener() {

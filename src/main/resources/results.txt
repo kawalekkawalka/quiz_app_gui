@@ -1,10 +1,7 @@
 Orzeł 15
 Hubert 12
-1 10
 Marcin 6
 Jan 5
 Michał 3
 Adam 2
-a 2
 Kamil 1
-h 0
